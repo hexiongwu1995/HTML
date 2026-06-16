@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" , initial-scale="1.0">
+
+    <title> 树脂调色的数学原理</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            line-height: 1.8;
+            font-family:  Microsoft YaHei， sans-serif;
+            padding: 20px;
+            max-width: 210mm;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: rgb(0, 81, 255);
+            margin: 50px 0 10px 0;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        h2 {
+            color: rgb(0, 81, 255);
+            margin: 40px 0 20px 0;
+            text-align: left;
+            font-size: 20px;
+        }
+
+        h3,
+        h4 {
+            color: rgba(0, 0, 0, 0.918);
+            margin: 10px 0;
+            text-align: left;
+            font-size: 15px;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <h1> 树脂调色的数学原理</h1>
+
+    <h2> CIELAB 颜色空间 </h2>
+
+    <p>CIELAB 颜色空间（也称为 L*a*b* 颜色空间）是由国际照明委员会（CIE）在 1976 年定义的一种颜色空间，旨在更均匀地表示人眼对颜色的感知。</p>
+
+    <h3> 三维结构</h3>
+    <ul>
+        <li><strong>L*</strong>：表示亮度（Lightness），范围从 0（黑色）到 100（白色）</li>
+        <li><strong>a*</strong>：表示红绿轴，正值偏红，负值偏绿</li>
+        <li><strong>b*</strong>：表示黄蓝轴，正值偏黄，负值偏蓝</li>
+    </ul>
+
+    <h3> 设备无关性</h3>
+    <p>CIELAB 颜色空间不依赖于具体的显示设备或打印设备，是一种绝对的颜色表示方法。</p>
+
+    <h3> 感知均匀性</h3>
+    <p>与 RGB 或 CMYK 相比，CIELAB 空间中两点之间的距离更接近人眼感知到的颜色差异。颜色差异可以用欧几里得距离计算：</p>
+    $$\Delta E = \sqrt{(\Delta L^*)^2 + (\Delta a^*)^2 + (\Delta b^*)^2}$$
+
+    <h3> 在树脂调色中的应用</h3>
+    <ul>
+        <li><strong>精确的颜色匹配</strong>：通过计算目标颜色与当前颜色的 ΔE 值，可以量化颜色差异</li>
+        <li><strong>颜色混合预测</strong>：基于数学模型预测不同颜料混合后的颜色</li>
+        <li><strong>批次一致性</strong>：确保不同批次的树脂颜色保持一致</li>
+    </ul>
+
+    <h2> CIELAB 颜色空间的数学模型 </h2>
+
+    <p>CIELAB 颜色空间的数值计算基于 CIE XYZ 颜色空间，通过严谨的数学公式转换而来。</p>
+
+    <h3> 从 XYZ 到 CIELAB 的转换公式 </h3>
+
+    <p>首先计算归一化的 XYZ 值：</p>
+    $$\frac{X}{X_n}, \frac{Y}{Y_n}, \frac{Z}{Z_n}$$
+
+    <p>其中 \( X_n, Y_n, Z_n \) 是参考白点的 XYZ 值（常用 D65 标准光源：\( X_n = 95.047, Y_n = 100.000, Z_n = 108.883 \) 。</p>
+
+    <h3> 中间函数 f(t) </h3>
+    <p>定义分段函数：</p>
+    $$f(t) = \begin{cases}
+    t^{1/3} & \text{if } t > \delta^3 \\
+    \frac{t}{3\delta^2} + \frac{4}{29} & \text{otherwise}
+    \end{cases}$$
+
+    <p>其中 \( \delta = \frac{6}{29} \)。</p>
+
+    <h3> 计算 L*, a*, b* </h3>
+    $$L^* = 116 \cdot f\left(\frac{Y}{Y_n}\right) - 16$$
+
+    $$a^* = 500 \cdot \left[f\left(\frac{X}{X_n}\right) - f\left(\frac{Y}{Y_n}\right)\right]$$
+
+    $$b^* = 200 \cdot \left[f\left(\frac{Y}{Y_n}\right) - f\left(\frac{Z}{Z_n}\right)\right]$$
+
+    <h3> 从 RGB 到 CIELAB 的转换 </h3>
+    <p>在实际应用中，通常需要从 RGB 转换到 CIELAB，这需要两步：</p>
+    <ol>
+        <li><strong>RGB → XYZ</strong>：通过线性变换矩阵</li>
+        <li><strong>XYZ → CIELAB</strong>：使用上述公式</li>
+    </ol>
+
+    <h2> CIE XYZ颜色空间 </h2>
+
+    <p>CIE XYZ 颜色空间是由国际照明委员会（CIE）在 1931 年定义的颜色空间，是 CIELAB 颜色空间的基础。</p>
+
+    <h3> 三刺激值 </h3>
+    <p>XYZ 颜色空间使用三个虚拟的原色 X、Y、Z 来表示颜色：</p>
+    <ul>
+        <li><strong>X</strong>：与红色感知相关</li>
+        <li><strong>Y</strong>：表示亮度（Luminance）</li>
+        <li><strong>Z</strong>：与蓝色感知相关</li>
+    </ul>
+
+    <h3> 色度图 </h3>
+    <p>XYZ 颜色空间可以投影到二维色度图上，使用归一化坐标 x 和 y：</p>
+    $$x = \frac{X}{X + Y + Z}, \quad y = \frac{Y}{X + Y + Z}$$
+
+    <h3> 从 sRGB 到 XYZ 的转换 </h3>
+    <p>对于标准的 sRGB 颜色空间，转换矩阵为：</p>
+    $$\begin{bmatrix} X \\ Y \\ Z \end{bmatrix} = \begin{bmatrix} 0.4124 & 0.3576 & 0.1805 \\ 0.2126 & 0.7152 & 0.0722
+    \\ 0.0193 & 0.1192 & 0.9505 \end{bmatrix} \begin{bmatrix} R_{linear} \\ G_{linear} \\ B_{linear} \end{bmatrix}$$
+
+    <p>其中 \( R_{linear}, G_{linear}, B_{linear} \) 是线性化后的 RGB 值（需要先将 sRGB 值进行逆伽马校正）。</p>
+
+
+
+    <h2> sRGB颜色空间 </h2>
+
+    <p>sRGB 是由惠普和微软于 1996 年共同开发的一种标准 RGB 颜色空间，已成为互联网和大多数显示设备的默认颜色空间。</p>
+
+    <h3> 主要特性</h3>
+    <ul>
+        <li><strong>色域范围</strong>：相对较小但足够满足大多数日常应用需求</li>
+        <li><strong>伽马校正</strong>：采用近似 2.2 的伽马曲线，补偿显示设备的非线性特性</li>
+        <li><strong>参考白点</strong>：使用 D65 标准光源（色温 6500K）</li>
+        <li><strong>三原色</strong>：红 (0.64, 0.33)、绿 (0.30, 0.60)、蓝 (0.15, 0.06) 色度坐标</li>
+    </ul>
+
+    <h3> 伽马校正</h3>
+    <p>sRGB 使用分段函数进行伽马校正，将线性 RGB 值转换为非线性值：</p>
+    $$
+    V_{srgb} = \begin{cases}
+    1.055 \cdot V_{linear}^{1/2.4} - 0.055 & \text{if } V_{linear} > 0.0031308 \\
+    12.92 \cdot V_{linear} & \text{otherwise}
+    \end{cases}
+    $$
+
+    <p>逆过程（线性化）为：</p>
+    $$
+    V_{linear} = \begin{cases}
+    \left(\frac{V_{srgb} + 0.055}{1.055}\right)^{2.4} & \text{if } V_{srgb} > 0.04045 \\
+    \frac{V_{srgb}}{12.92} & \text{otherwise}
+    \end{cases}
+    $$
+
+    <h3> 应用</h3>
+    <ul>
+        <li><strong>数字设计</strong>：在计算机上设计树脂颜色时，通常使用 sRGB 值</li>
+        <li><strong>颜色预览</strong>：显示器上的颜色预览基于 sRGB 标准</li>
+        <li><strong>数据交换</strong>：便于在不同设备和软件之间交换颜色数据</li>
+        <li><strong>转换基础</strong>：作为从数字颜色到物理颜料的转换起点</li>
+    </ul>
+
+    <h2> 人眼对颜色的感知 </h2>
+
+    <p>人眼对颜色的感知是一个复杂的生理和心理学过程，基于视网膜上感光细胞对光的响应。</p>
+
+    <h3> 视网膜感光细胞</h3>
+    <p>人眼视网膜包含两种主要感光细胞：</p>
+    <ul>
+        <li><strong>视杆细胞（Rods）</strong>：约 1.2 亿个，负责暗视觉，对光强敏感但不分辨颜色</li>
+        <li><strong>视锥细胞（Cones）</strong>：约 600-700 万个，负责明视觉和颜色感知</li>
+    </ul>
+
+    <h3> 三种视锥细胞</h3>
+    <p>视锥细胞根据其对不同波长光的敏感性分为三类：</p>
+    <ul>
+        <li><strong>S 型视锥细胞（短波）</strong>：峰值响应波长约 420-440nm（蓝色）</li>
+        <li><strong>M 型视锥细胞（中波）</strong>：峰值响应波长约 530-540nm（绿色）</li>
+        <li><strong>L 型视锥细胞（长波）</strong>：峰值响应波长约 560-580nm（红色）</li>
+    </ul>
+
+    <h3> 光谱响应函数</h3>
+    <p>每种视锥细胞的光谱响应可以用灵敏度函数表示。CIE 1931 标准观察者基于大量实验数据定义了颜色匹配函数 \(\bar{x}(\lambda)\)、\(\bar{y}(\lambda)\)、\(\bar{z}(\lambda)\)：</p>
+    $$
+    X = k \int_{380}^{780} S(\lambda) \bar{x}(\lambda) d\lambda
+    $$
+    $$
+    Y = k \int_{380}^{780} S(\lambda) \bar{y}(\lambda) d\lambda
+    $$
+    $$
+    Z = k \int_{380}^{780} S(\lambda) \bar{z}(\lambda) d\lambda
+    $$
+
+    <p>其中 \(S(\lambda)\) 是入射光的光谱功率分布，\(k\) 是归一化常数。</p>
+
+    <h4> 视锥细胞的光谱灵敏度函数</h4>
+    <p>三种视锥细胞的光谱灵敏度函数可以用高斯函数近似表示：</p>
+    $$
+    R_S(\lambda) = \exp\left[-\frac{(\lambda - \lambda_S)^2}{2\sigma_S^2}\right]
+    $$
+    $$
+    R_M(\lambda) = \exp\left[-\frac{(\lambda - \lambda_M)^2}{2\sigma_M^2}\right]
+    $$
+    $$
+    R_L(\lambda) = \exp\left[-\frac{(\lambda - \lambda_L)^2}{2\sigma_L^2}\right]
+    $$
+
+    <p>典型参数值为：</p>
+    <ul>
+        <li>S 型：\(\lambda_S = 440\text{nm}\)，\(\sigma_S = 35\text{nm}\)</li>
+        <li>M 型：\(\lambda_M = 540\text{nm}\)，\(\sigma_M = 38\text{nm}\)</li>
+        <li>L 型：\(\lambda_L = 565\text{nm}\)，\(\sigma_L = 40\text{nm}\)</li>
+    </ul>
+
+
+    <h4> 颜色匹配函数与光谱灵敏度函数之间的数学关系 </h4>
+    <p>颜色匹配函数 \(\bar{x}(\lambda)\)、\(\bar{y}(\lambda)\)、\(\bar{z}(\lambda)\) 与视锥细胞的光谱灵敏度函数 \(R_S(\lambda)\)、\(R_M(\lambda)\)、\(R_L(\lambda)\) 之间存在线性变换关系。</p>
+
+    <h5> 线性变换模型</h5>
+    <p>CIE 1931 颜色匹配函数可以通过视锥细胞响应函数的线性组合来表示：</p>
+    $$
+    \begin{bmatrix}
+    \bar{x}(\lambda) \\
+    \bar{y}(\lambda) \\
+    \bar{z}(\lambda)
+    \end{bmatrix}
+    = M
+    \begin{bmatrix}
+    R_L(\lambda) \\
+    R_M(\lambda) \\
+    R_S(\lambda)
+    \end{bmatrix}
+    $$
+
+    <p>其中 \(M\) 是一个 3×3 的变换矩阵。</p>
+
+    <h5> Hunt-Pointer-Esteve 模型</h5>
+    <p>一个常用的变换矩阵（基于 Hunt-Pointer-Esteve 模型）为：</p>
+    $$
+    M \approx
+    \begin{bmatrix}
+    0.15514 & 0.5431571 & -0.03089 \\
+    -0.15514 & 0.4568429 & -0.03089 \\
+    0 & 0 & 0.266882
+    \end{bmatrix}
+    $$
+
+    <p>这个矩阵将 LMS 空间（视锥细胞响应）转换到 XYZ 空间。</p>
+
+    <h5> 反向变换</h5>
+    <p>从 XYZ 空间到 LMS 空间的反向变换为：</p>
+    $$
+    \begin{bmatrix}
+    R_L(\lambda) \\
+    R_M(\lambda) \\
+    R_S(\lambda)
+    \end{bmatrix}
+    = M^{-1}
+    \begin{bmatrix}
+    \bar{x}(\lambda) \\
+    \bar{y}(\lambda) \\
+    \bar{z}(\lambda)
+    \end{bmatrix}
+    $$
+
+    <p>逆变换矩阵 \(M^{-1}\) 为：</p>
+    $$
+    M^{-1} \approx
+    \begin{bmatrix}
+    2.06828 & -1.06828 & 0.37496 \\
+    0.76362 & 0.23638 & 0.37496 \\
+    0 & 0 & 3.7496
+    \end{bmatrix}
+    $$
+
+    <h5> 色适应变换</h5>
+    <p>在不同照明条件下，人眼会发生色适应（Color Adaptation）。Von Kries 色适应模型描述了这一过程：</p>
+    $$
+    \begin{bmatrix}
+    R_L' \\
+    R_M' \\
+    R_S'
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    d_L & 0 & 0 \\
+    0 & d_M & 0 \\
+    0 & 0 & d_S
+    \end{bmatrix}
+    \begin{bmatrix}
+    R_L \\
+    R_M \\
+    R_S
+    \end{bmatrix}
+    $$
+
+    <p>其中 \(d_L\)、\(d_M\)、\(d_S\) 是通道独立的适应系数，取决于参考白点的 LMS 值：</p>
+    $$
+    d_L = \frac{L_{W2}}{L_{W1}}, \quad d_M = \frac{M_{W2}}{M_{W1}}, \quad d_S = \frac{S_{W2}}{S_{W1}}
+    $$
+
+    <h5> 数学推导</h5>
+    <p>颜色匹配函数的实验基础是颜色匹配实验。在实验中，观察者调整三个原色的强度来匹配目标颜色：</p>
+    $$
+    T(\lambda) = r_1 \cdot O_1(\lambda) + r_2 \cdot O_2(\lambda) + r_3 \cdot O_3(\lambda)
+    $$
+
+    <p>其中 \(T(\lambda)\) 是目标颜色的光谱功率分布，\(O_1\)、\(O_2\)、\(O_3\) 是原色，\(r_1\)、\(r_2\)、\(r_3\) 是匹配系数。CIE 通过大量实验确定了标准观察者的颜色匹配函数。</p>
+
+    <h6> 颜色匹配实验设置</h6>
+    <p>典型的颜色匹配实验装置包括：</p>
+    <ul>
+        <li><strong>分视场</strong>：将视野分为两个相等的半圆，左侧为目标颜色，右侧为混合色</li>
+        <li><strong>照明条件</strong>：使用标准光源（如 CIE D65）照明</li>
+        <li><strong>原色选择</strong>：通常选择红（700nm）、绿（546.1nm）、蓝（435.8nm）作为三原色</li>
+        <li><strong>观察距离</strong>：2°视场对应约 1.7 米的观察距离</li>
+    </ul>
+
+    <h6> 颜色匹配方程</h6>
+    <p>对于任意光谱功率分布 \(T(\lambda)\)，其颜色匹配方程为：</p>
+    $$
+    \bar{t}(\lambda) = \int_{380}^{780} T(\lambda) \cdot \bar{r}(\lambda) d\lambda
+    $$
+
+    <p>其中 \(\bar{r}(\lambda)\) 是原色的颜色匹配函数。实际匹配中，观察者需要调节三个原色的强度 \(R\)、\(G\)、\(B\)：</p>
+    $$
+    T(\lambda) \equiv R \cdot O_R(\lambda) + G \cdot O_G(\lambda) + B \cdot O_B(\lambda)
+    $$
+
+    <p>符号 \(\equiv\) 表示"颜色匹配"，即两个光谱在视觉上无法区分。</p>
+
+    <h6> 负系数问题</h6>
+    <p>在某些情况下，为了匹配某些颜色，需要将原色添加到目标颜色一侧，这导致出现负系数：</p>
+    $$
+    T(\lambda) + B' \cdot O_B(\lambda) = R' \cdot O_R(\lambda) + G' \cdot O_G(\lambda)
+    $$
+
+    <p>为了解决这个问题，CIE 定义了虚拟的原色 X、Y、Z，确保所有颜色匹配函数的值都是非负的。</p>
+
+    <h6> CIE 1931 标准观察者</h6>
+    <p>CIE 1931 标准观察者基于 Wright 和 Guild 的实验数据，通过线性变换得到：</p>
+    <ol>
+        <li><strong>数据收集</strong>：收集了多位观察者的颜色匹配实验数据</li>
+        <li><strong>平均化</strong>：对实验数据进行统计平均</li>
+        <li><strong>线性变换</strong>：将 RGB 系统转换到 XYZ 系统</li>
+    </ol>
+
+    <p>变换矩阵 \(M_{RGB \to XYZ}\) 为：</p>
+    $$
+    \begin{bmatrix}
+    \bar{x}(\lambda) \\
+    \bar{y}(\lambda) \\
+    \bar{z}(\lambda)
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    2.7689 & 1.7517 & 1.1302 \\
+    1.0000 & 4.5907 & 0.0601 \\
+    0.0000 & 0.0565 & 5.5943
+    \end{bmatrix}
+    \begin{bmatrix}
+    \bar{r}(\lambda) \\
+    \bar{g}(\lambda) \\
+    \bar{b}(\lambda)
+    \end{bmatrix}
+    $$
+
+    <h6> 颜色匹配函数的性质</h6>
+    <p>CIE 1931 颜色匹配函数具有以下重要性质：</p>
+    <ul>
+        <li><strong>非负性</strong>：\(\bar{y}(\lambda) \geq 0\)，但 \(\bar{x}(\lambda)\) 和 \(\bar{z}(\lambda)\) 在某些波长可能为负</li>
+        <li><strong>归一化</strong>：\(\int_{380}^{780} \bar{y}(\lambda) d\lambda = 100\)</li>
+        <li><strong>对称性</strong>：\(\bar{x}(\lambda)\) 和 \(\bar{z}(\lambda)\) 的峰值位置相对 \(\bar{y}(\lambda)\) 对称</li>
+        <li><strong>重叠性</strong>：三种函数在可见光范围内有显著重叠</li>
+    </ul>
+
+    <h6> 2°与 10°视场</h6>
+    <p>CIE 定义了两种标准观察者：</p>
+    <ul>
+        <li><strong>1931 2°标准观察者</strong>：适用于小视场（1°-4°）的颜色匹配</li>
+        <li><strong>1964 10°标准观察者</strong>：适用于大视场（>4°）的颜色匹配</li>
+    </ul>
+
+    <p>10°观察者的颜色匹配函数记为 \(\bar{x}_{10}(\lambda)\)、\(\bar{y}_{10}(\lambda)\)、\(\bar{z}_{10}(\lambda)\)。</p>
+
+    <h6> 在树脂调色中的应用</h6>
+    <ul>
+        <li><strong>光谱测量</strong>：使用分光光度计测量树脂颜料的光谱反射率，通过颜色匹配函数计算 XYZ 值</strong></li>
+        <li><strong>颜色预测</strong>：基于 Kubelka-Munk 理论和颜色匹配函数预测颜料混合后的颜色</strong></li>
+        <li><strong>配方优化</strong>：通过最小化 ΔE 值优化颜料配比，实现目标颜色的精确匹配</strong></li>
+    </ul>
+
+    <h5> 在树脂调色中的应用</h5>
+    <ul>
+        <li><strong>颜色空间转换</strong>：在不同颜色空间之间进行精确转换</strong></li>
+        <li><strong>色适应校正</strong>：在不同照明条件下预测颜色外观</strong></li>
+        <li><strong>颜料配方优化</strong>：基于生理模型优化颜料配比</strong></li>
+    </ul>
+
+
+    <h4> CIE 1931 颜色匹配函数</h4>
+    <p>CIE 1931 标准观察者的颜色匹配函数基于 2°视场的颜色匹配实验，其关键特性包括：</p>
+    <ul>
+        <li>\(\bar{y}(\lambda)\) 与人眼的明视觉光谱光视效率函数 \(V(\lambda)\) 完全相同</li>
+        <li>可见光范围：380nm - 780nm，采样间隔通常为 1nm 或 5nm</li>
+        <li>归一化条件：\(\int_{380}^{780} \bar{y}(\lambda) d\lambda = 100\)</li>
+    </ul>
+
+    <h4> 三刺激值的物理意义</h4>
+    <p>XYZ 三刺激值代表了匹配某颜色所需的三原色数量：</p>
+    <ul>
+        <li><strong>X</strong>：与红色感知相关，但不完全对应红色</li>
+        <li><strong>Y</strong>：表示亮度（Luminance），与人眼的光视效率函数一致</li>
+        <li><strong>Z</strong>：与蓝色感知相关，但不完全对应蓝色</li>
+    </ul>
+
+    <h4> 色度坐标计算</h4>
+    <p>从三刺激值可以计算出色度坐标，用于二维表示颜色：</p>
+    $$
+    x = \frac{X}{X + Y + Z}, \quad y = \frac{Y}{X + Y + Z}, \quad z = \frac{Z}{X + Y + Z} = 1 - x - y
+    $$
+
+    <p>色度坐标满足 \(x + y + z = 1\)，因此只需两个坐标即可确定颜色。</p>
+
+    <h4> 在树脂调色中的应用</h4>
+    <ul>
+        <li><strong>光谱测量</strong>：使用分光光度计测量树脂颜料的光谱反射率曲线</strong></li>
+        <li><strong>颜色计算</strong>：通过光谱数据计算 XYZ 三刺激值和 CIELAB 值</strong></li>
+        <li><strong>颜料配方</strong>：基于 K-S 理论（Kubelka-Munk）预测颜料混合后的颜色</strong></li>
+    </ul>
+
+    <h3> 韦伯 - 费希纳定律</h3>
+    <p>人眼对亮度变化的感知遵循韦伯 - 费希纳定律，即感知强度与刺激强度的对数成正比：</p>
+    $$
+    P = k \cdot \log\left(\frac{I}{I_0}\right)
+    $$
+
+    <p>其中 \(P\) 是感知强度，\(I\) 是实际光强，\(I_0\) 是阈值强度，\(k\) 是常数。</p>
+
+    <h3> 最小可觉差（JND）</h3>
+    <p>人眼能够察觉的最小颜色差异称为最小可觉差（Just Noticeable Difference, JND）。在 CIELAB 空间中，通常认为：</p>
+    <ul>
+        <li>\(\Delta E < 1\)：人眼无法察觉差异</li>
+        <li>\(1 \leq \Delta E < 2\)：只有敏感的人才能察觉</li>
+        <li>\(2 \leq \Delta E < 3.5\)：普通观察者能察觉轻微差异</li>
+        <li>\(3.5 \leq \Delta E < 5\)：明显可察觉的颜色差异</li>
+        <li>\(\Delta E \geq 5\)：显著的颜色差异</li>
+    </ul>
+
+    <h3> 同时对比效应</h3>
+    <p>人眼对颜色的感知会受到周围环境的影响。同时对比效应可以用以下模型近似描述：</p>
+    $$
+    L_{perceived} = L_{actual} + \alpha \cdot (L_{background} - L_{actual})
+    $$
+
+    <p>其中 \(\alpha\) 是对比系数，通常在 0.1-0.3 之间。</p>
+
+    <h3> 在树脂调色中的应用</h3>
+    <ul>
+        <li><strong>颜色匹配容差</strong>：根据 JND 标准确定可接受的颜色偏差范围</strong></li>
+        <li><strong>视觉评估</strong>：理解人眼感知特性有助于更准确的颜色评估</strong></li>
+        <li><strong>环境因素</strong>：考虑照明条件和背景对颜色感知的影响</strong></li>
+    </ul>
+
+    <h2> 在树脂调色中的应用 </h2>
+    <ul>
+        <li><strong>精确计算颜料混合后的颜色变化</strong></li>
+        <li><strong>通过 ΔE 公式量化颜色差异</strong></li>
+        <li><strong>建立颜料添加量与颜色变化的数学关系模型</strong></li>
+    </ul>
+
+
+    <ul>
+        <li><strong>精确计算颜料混合后的颜色变化</strong></li>
+        <li><strong>通过 ΔE 公式量化颜色差异</strong></li>
+        <li><strong>建立颜料添加量与颜色变化的数学关系模型</strong></li>
+    </ul>
+
+</body>
+
+</html>
