@@ -183,6 +183,7 @@
 
     <h3>颜色匹配</h3>
 
+
     <p>Wright-Guild 颜色匹配实验使用圆形颜色屏幕进行，屏幕分为相等的半圆（二分场）。屏幕放置在距离受试者（观察者）一定距离处，使其直径在受试者的视野中张角为
         2°。在屏幕的一半，投射测试（目标）颜色，而在另一半投射观察者可调整的颜色。可调整的颜色是三种单色原色的混合，每种都有可调整的亮度。受试者会调整三个原束的亮度，直到两半看起来是同色异谱的。</p>
 
@@ -190,9 +191,32 @@
         颜色匹配函数。任何光谱分布都可以看作是在不同强度下的许多单色源的组合，因此（根据格拉斯曼定律）将颜色匹配函数与该光谱分布积分将产生匹配它所需的三种原色的强度。问题是三种原色只能产生位于其色域内的颜色——颜色空间中由原色形成的三角形，除了三个原色外，永远不会触及光谱轨迹或紫红线。换句话说，除了三个原色的波长本身外，没有单色目标可以通过三种原色的组合来匹配。匹配单色目标需要其中一个原色具有负亮度。虽然这在物理上是不可能的，但可以通过将负原色添加到目标场而不是从调整场中减去它来近似（依赖格拉斯曼定律），从而允许使用负原色亮度进行匹配。
     </p>
 
+<div style="display: flex; justify-content: space-between; align-items: flex-start; margin: 0 0 20px 20px;">
+    <figure style="max-width: 30%; margin: 0 10px 0 0;">
+        <img src="CIE1931xy_CIERGB.svg" width="100%" height="auto">
+        <figcaption style="font-size: 10px; line-height: 1.4; text-align: center;">Gamut of the CIE RGB primaries and location of primaries on the CIE 1931 xy chromaticity diagram</figcaption>
+    </figure>
+
+    <figure style="max-width: 30%; margin: 0 10px 0 0;">
+        <img src="CIE1931_RGBCMF2.png" width="100%" height="auto">
+        <figcaption style="font-size: 10px; line-height: 1.4; text-align: center;">The CIE 1931 RGB color-matching functions normalized to equal areas under the curves. Multiplying the red and green curves by 72.0962 and 1.3791 respectively yields the actual color-matching functions. The color-matching functions are proportional to the intensities of primaries needed to match the monochromatic test color at the wavelength shown on the horizontal scale.</figcaption>
+    </figure>
+
+    <figure style="max-width: 30%; margin: 0 0 0 0;">
+        <img src="CIE_1931_XYZ_Color_Matching_Functions.svg" width="100%" height="auto">
+        <figcaption style="font-size: 10px; line-height: 1.4; text-align: center;">The CIE XYZ standard observer color-matching functions</figcaption>
+    </figure>
+</div>
+
+
+
+
+
     <p>对于蓝色和绿色原色之间的波长，必须将一些红色原色添加到目标，导致 r̄(λ)的负值。同样，在绿色和红色原色之间，必须将一些蓝色添加到目标，导致
         b̄(λ)的负值。对于低于蓝色原色波长或高于红色原色波长的波长，必须添加一些绿色，ḡ(λ)将为负值。对于每种光谱颜色，除了由原色定义的颜色外，总是有两个正颜色匹配函数和一个负值（只要原色都是单色的）。可以看出（在右侧的色度图中），三角形
         CIE RGB 色域的边界与 xy 色度图的光谱轨迹对齐良好，除了在蓝色和绿色原色之间，其中必须向测试场添加大量红色原色，正是在这个波段，红色颜色匹配函数具有最显著的负值。</p>
+
+
 
     <h3>CIE RGB 颜色空间</h3>
 
