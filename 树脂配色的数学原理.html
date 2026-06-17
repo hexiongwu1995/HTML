@@ -15,7 +15,7 @@
 
         body {
             line-height: 1.8;
-            font-family: Microsoft YaHei， sans-serif;
+            font-family: Microsoft YaHei, sans-serif;
             padding: 10px;
             max-width: 210mm;
             width: 100%;
@@ -45,8 +45,6 @@
             text-align: left;
             font-size: 15px;
         }
-
-
     </style>
 
 </head>
@@ -437,9 +435,13 @@
 
     <h4> 色度坐标计算</h4>
     <p>从三刺激值可以计算出色度坐标，用于二维表示颜色：</p>
-    $$
-    x = \frac{X}{X + Y + Z}, \quad y = \frac{Y}{X + Y + Z}, \quad z = \frac{Z}{X + Y + Z} = 1 - x - y
-    $$
+
+    <div style="overflow-x: auto;">
+        $$
+        x = \frac{X}{X + Y + Z}, \quad y = \frac{Y}{X + Y + Z}, \quad z = \frac{Z}{X + Y + Z} = 1 - x - y
+        $$
+    </div>
+
 
     <p>色度坐标满足 \(x + y + z = 1\)，因此只需两个坐标即可确定颜色。</p>
 
