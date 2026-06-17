@@ -152,12 +152,17 @@
 
     <h3> 伽马校正</h3>
     <p>sRGB 使用分段函数进行伽马校正，将线性 RGB 值转换为非线性值：</p>
-    $$
-    V_{srgb} = \begin{cases}
-    1.055 \cdot V_{linear}^{1/2.4} - 0.055 & \text{if } V_{linear} > 0.0031308 \\
-    12.92 \cdot V_{linear} & \text{otherwise}
-    \end{cases}
-    $$
+
+    <div style="overflow-x: auto;">
+        $$
+        V_{srgb} = \begin{cases}
+        1.055 \cdot V_{linear}^{1/2.4} - 0.055 & \text{if } V_{linear} > 0.0031308 \\
+        12.92 \cdot V_{linear} & \text{otherwise}
+        \end{cases}
+        $$
+    </div>
+
+
 
     <p>逆过程（线性化）为：</p>
     $$
