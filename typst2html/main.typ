@@ -7,7 +7,9 @@
   #title()
   Welcome to my blog!
 
-  This is a math equation: $integral_0^infinity e^(-x^2) d x = sqrt(pi) /2$
+  This is an inline math equation: $integral_0^infinity e^(-x^2) d x = sqrt(pi) /2$
+
+  This is a display math equation: $ integral_0^infinity e^(-x^2) d x = sqrt(pi) /2 $
 
   This blog also exists as a
   #link(<blog-pdf>)[single PDF].
@@ -15,6 +17,10 @@
 
 #document("blog.pdf", title: [Blog])[
   Hello, Typst
+
+  This is a math equation: $integral_0^infinity e^(-x^2) d x = sqrt(pi) /2$
+
+  This is a display math equation: $ integral_0^infinity e^(-x^2) d x = sqrt(pi) /2 $
 ] <blog-pdf>
 
 #asset(
