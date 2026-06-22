@@ -1,1 +1,0 @@
-This is a math equation: $integral_0^infinity e^(-x^2) d x = sqrt(pi) /2$
