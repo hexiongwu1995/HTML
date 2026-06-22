@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>麦克斯韦方程组</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@myriaddreamin/typst-all-in-one.ts@0.7.0/dist/esm/index.js"
+        id="typst"></script>
+
+    <script type="module">
+        // 更可靠的等待方式：轮询检测 $typst 是否就绪
+        function waitForTypst(callback) {
+            if (typeof $typst !== 'undefined') {
+                callback();
+            } else {
+                setTimeout(() => waitForTypst(callback), 50);
+            }
+        }
+
+        waitForTypst(async () => {
+            console.log('Typst 库已加载，开始渲染...');
+
+            const mainContent = `
+= 麦克斯韦方程组
+
+麦克斯韦方程组是描述电磁场的基本方程组。
+
+== 高斯定律
+
+$
+  nabla dot bold(E) = rho / epsilon_0
+$
+
+== 法拉第定律
+
+$
+  nabla times bold(E) = - partial bold(B) / partial t
+$
+            `;
+
+            try {
+                const svg = await $typst.svg({ mainContent });
+                console.log('渲染成功！SVG 长度:', svg.length);
+
+                const container = document.getElementById('typst-container');
+                container.innerHTML = svg;
+            } catch (err) {
+                console.error('渲染失败:', err);
+                document.getElementById('typst-container').innerHTML =
+                    '<p style="color:red">渲染失败: ' + err.message + '</p>';
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <h1>麦克斯韦方程组</h1>
+
+    <h2>磁生电现象的发现与数学描述</h2>
+
+    <!-- Typst 渲染结果将显示在这里 -->
+    <div id="typst-container" style="padding: 20px; background: #f9f9f9; border-radius: 8px;"></div>
+
+</body>
+
+</html>
