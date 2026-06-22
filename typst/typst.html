@@ -24,6 +24,28 @@
             console.log('Typst 库已加载，开始渲染...');
 
             const mainContent = `
+#set page(
+    width: auto,
+    height: auto,
+    margin: 0.5cm,
+    fill: white,
+)
+
+// 强制使用系统本地中文字体（不依赖网络下载）
+#set text(
+    font: (
+        "Microsoft YaHei",
+        "微软雅黑",
+        "SimHei",
+        "黑体",
+        "SimSun",
+        "宋体",
+        "Noto Sans CJK SC",
+        "WenQuanYi Micro Hei",
+        "sans-serif"
+    )
+)
+
 = 麦克斯韦方程组
 
 麦克斯韦方程组是描述电磁场的基本方程组。
