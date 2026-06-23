@@ -1,7 +1,36 @@
-h1 {
-    text-align: center;
-    font-size: 1.5rem;
+/* 标题自动编号 */
+body {
+    counter-reset: h1-counter 0;
 }
+
+h1 {
+    counter-reset: h2-counter 0;
+    text-align: left;
+    font-size: 1.2rem;
+}
+h1::before {
+    counter-increment: h1-counter;
+    content: counter(h1-counter) ". ";
+}
+
+h2 {
+    counter-reset: h3-counter 0;
+    font-size: 1rem;
+}
+h2::before {
+    counter-increment: h2-counter;
+    content: counter(h1-counter) "." counter(h2-counter) ". ";
+}
+
+h3 {
+    counter-reset: h4-counter 0;
+}
+h3::before {
+    counter-increment: h3-counter;
+    content: counter(h1-counter) "." counter(h2-counter) "." counter(h3-counter) ". ";
+
+}
+
 .display {
     text-align: center;
     font-size: 1.2rem;
