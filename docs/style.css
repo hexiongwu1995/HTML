@@ -29,6 +29,8 @@ h2::before {
 
 h3 {
     counter-reset: h4-counter 0;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
 h3::before {
