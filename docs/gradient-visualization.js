@@ -67,12 +67,13 @@ view = mathbox
 //         depth: 0.5,
 //     })
 //     .end()
-var rectXZ = [[1, 0, 1], [1, 0, -1], [-1, 0, -1], [-1, 0, 1]];
-var rectXY = [[1, 0, 0], [1, 2, 0], [-1, 2, 0], [-1, 0, 0]];
 
-drawRect(view, rectXZ, [0, 2, 0]);
-drawRect(view, rectXY, [0, 0, 1]);
-drawRect(view, rectXY, [0, 0, -1]);
+// var rectXZ = [[1, 0, 1], [1, 0, -1], [-1, 0, -1], [-1, 0, 1]];
+// var rectXY = [[1, 0, 0], [1, 2, 0], [-1, 2, 0], [-1, 0, 0]];
+
+// drawRect(view, rectXZ, [0, 2, 0]);
+// drawRect(view, rectXY, [0, 0, 1]);
+// drawRect(view, rectXY, [0, 0, -1]);
 
 view.area({
     axes: "xz",
