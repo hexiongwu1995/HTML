@@ -98,17 +98,17 @@ view.area({
 //     }).end()
 // })
 
-view.axis({
-    axis: 1, end: true, width: 2, color: "rgb(110, 110, 110)",
-}).end()
+// view.axis({
+//     axis: 1, end: true, width: 2, color: "rgb(110, 110, 110)",
+// }).end()
 
-view.axis({
-    axis: 2, end: true, width: 2, color: "rgb(110, 110, 110)",
-}).end()
+// view.axis({
+//     axis: 2, end: true, width: 2, color: "rgb(110, 110, 110)",
+// }).end()
 
-view.axis({
-    axis: 3, end: true, width: 2, color: "rgb(110, 110, 110)",
-}).end()
+// view.axis({
+//     axis: 3, end: true, width: 2, color: "rgb(110, 110, 110)",
+// }).end()
 
 // var offset_coefficient = 1.06;
 // view
