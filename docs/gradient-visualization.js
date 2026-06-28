@@ -58,7 +58,7 @@ view = mathbox
 
 [1, 2, 3].forEach(element => {
     view.axis({
-        axis: element, end: true, width: 2, color: colors.axis,
+        axis: element, end: true, width: 2, color: "rgb(110, 110, 110)",
     })
 })
 
