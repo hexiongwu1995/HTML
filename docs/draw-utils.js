@@ -5,7 +5,7 @@
  */
 
 function drawRect(view, points, position) {
-    view.array({ data: points, channels: 3, live: false });
+    view.array({ data: points, channels: 3, live: false }).end();
     view
         .transform({ position, scale: [1, 1, 1] })
         .line({ closed: true, color: "rgb(182, 182, 182)", width: 1, join: "miter" })
