@@ -10,7 +10,6 @@ const mathbox = MathBox.mathBox({
     camera: {
         fov: 60,
     },
-    pixelRatio: 1,        // ← 添加此行，强制使用 1x 像素比
 });
 
 three = mathbox.three;
