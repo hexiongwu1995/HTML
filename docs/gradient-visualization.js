@@ -8,7 +8,7 @@ const mathbox = MathBox.mathBox({
         klass: THREE.OrbitControls,
     },
     camera: {
-        fov: 40,
+        fov: 60,
     },
 });
 
