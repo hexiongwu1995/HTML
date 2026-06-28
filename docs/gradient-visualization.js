@@ -72,7 +72,7 @@ view
             [0, 0, rangeZ * offset_coefficient],
         ],
         channels: 3,
-        live: false,
+        live: true,
     })
     .text({
         data: ["x", "y", "z"],
