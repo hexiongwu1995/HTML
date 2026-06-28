@@ -67,7 +67,30 @@ view = mathbox
 //         depth: 0.5,
 //     })
 //     .end()
+var rectXZ = [[1, 0, 1], [1, 0, -1], [-1, 0, -1], [-1, 0, 1]];
+var rectXY = [[1, 0, 0], [1, 2, 0], [-1, 2, 0], [-1, 0, 0]];
 
+drawRect(view, rectXZ, [0, 2, 0]);
+drawRect(view, rectXY, [0, 0, 1]);
+drawRect(view, rectXY, [0, 0, -1]);
+
+view.area({
+    axes: "xz",
+    width: 21,
+    height: 21,
+    expr: function (emit, x, z, i, j, t) {
+        var y = x * x + z * z;
+        emit(x, y, z);
+    },
+})
+.surface({
+    lineX: true,
+    lineY: true,
+    shaded: false,
+    color: "rgb(255, 255, 255)",
+    lineBias: 1,
+    opacity: 0.8,
+});
 
 // [1, 2, 3].forEach(element => {
 //     view.axis({
@@ -109,30 +132,7 @@ view.axis({
 
 
 
-var rectXZ = [[1, 0, 1], [1, 0, -1], [-1, 0, -1], [-1, 0, 1]];
-var rectXY = [[1, 0, 0], [1, 2, 0], [-1, 2, 0], [-1, 0, 0]];
 
-drawRect(view, rectXZ, [0, 2, 0]);
-drawRect(view, rectXY, [0, 0, 1]);
-drawRect(view, rectXY, [0, 0, -1]);
-
-view.area({
-    axes: "xz",
-    width: 21,
-    height: 21,
-    expr: function (emit, x, z, i, j, t) {
-        var y = x * x + z * z;
-        emit(x, y, z);
-    },
-})
-.surface({
-    lineX: true,
-    lineY: true,
-    shaded: false,
-    color: "rgb(255, 255, 255)",
-    lineBias: 1,
-    opacity: 0.8,
-});
 
 // var sliceX = view
 //     .group()
