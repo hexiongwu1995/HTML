@@ -57,11 +57,36 @@ view = mathbox
         scale: [1, 1, 1],
     });
 
-[1, 2, 3].forEach(element => {
-    view.axis({
-        axis: element, end: true, width: 2, color: "rgb(110, 110, 110)",
+view
+    .transform({
+        position: [0, 0, 0],
     })
-})
+    .grid({
+        axes: [1, 3],
+        width: 1,
+        color: "rgb(218, 218, 218)",
+        depth: 0.5,
+    })
+    .end()
+
+
+// [1, 2, 3].forEach(element => {
+//     view.axis({
+//         axis: element, end: true, width: 2, color: "rgb(110, 110, 110)",
+//     }).end()
+// })
+
+view.axis({
+    axis: 1, end: true, width: 2, color: "rgb(110, 110, 110)",
+}).end()
+
+view.axis({
+    axis: 2, end: true, width: 2, color: "rgb(110, 110, 110)",
+}).end()
+
+view.axis({
+    axis: 3, end: true, width: 2, color: "rgb(110, 110, 110)",
+}).end()
 
 // var offset_coefficient = 1.06;
 // view
@@ -83,17 +108,7 @@ view = mathbox
 //         offset: [0, 0],
 //     });
 
-view
-    .transform({
-        position: [0, 0, 0],
-    })
-    .grid({
-        axes: [1, 3],
-        width: 1,
-        color: "rgb(218, 218, 218)",
-        depth: 0.5,
-    })
-    .end()
+
 
 // var rectXZ = [[1, 0, 1], [1, 0, -1], [-1, 0, -1], [-1, 0, 1]];
 // var rectXY = [[1, 0, 0], [1, 2, 0], [-1, 2, 0], [-1, 0, 0]];
