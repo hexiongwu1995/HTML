@@ -63,25 +63,25 @@ view = mathbox
     })
 })
 
-var offset_coefficient = 1.06;
-view
-    .array({
-        data: [
-            [rangeX * offset_coefficient, 0, 0],
-            [0, rangeY * offset_coefficient, 0],
-            [0, 0, rangeZ * offset_coefficient],
-        ],
-        channels: 3,
-        live: true,
-    })
-    .text({
-        data: ["x", "y", "z"],
-    })
-    .label({
-        color: "rgb(102, 102, 102)",
-        outline: 0,
-        offset: [0, 0],
-    });
+// var offset_coefficient = 1.06;
+// view
+//     .array({
+//         data: [
+//             [rangeX * offset_coefficient, 0, 0],
+//             [0, rangeY * offset_coefficient, 0],
+//             [0, 0, rangeZ * offset_coefficient],
+//         ],
+//         channels: 3,
+//         live: true,
+//     })
+//     .text({
+//         data: ["x", "y", "z"],
+//     })
+//     .label({
+//         color: "rgb(102, 102, 102)",
+//         outline: 0,
+//         offset: [0, 0],
+//     });
 
 view
     .transform({
