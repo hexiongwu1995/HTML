@@ -8,7 +8,7 @@ function drawRect(view, points, position) {
     view.array({ data: points, channels: 3, live: false });
     view
         .transform({ position, scale: [1, 1, 1] })
-        .line({ closed: true, color: colors.frame, width: 1, join: "miter" })
+        .line({ closed: true, color: "#bababa", width: 1, join: "miter" })
         .end();
 }
 
@@ -36,7 +36,6 @@ function drawCirc(view, originx, originy, originz, plane, radius, linewidth) {
         } else if (plane === "yz") {
             disc.push([originx, originy + radius * Math.cos(theta), originz + radius * Math.sin(theta)])
         }
-
     }
     // 提供数据
     view.array({
@@ -47,7 +46,7 @@ function drawCirc(view, originx, originy, originz, plane, radius, linewidth) {
 
     // 绘制轮廓圆（线）
     view.line({
-        color: 'black',
+        color: "#cdcdcd",
         width: linewidth,
         closed: true,
     });

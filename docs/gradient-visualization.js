@@ -111,9 +111,9 @@ view.area({
     lineX: true,
     lineY: true,
     shaded: false,
-    color: "rgba(180, 220, 240, 1)",
+    color: "#efefef",
     lineBias: 1,
-    opacity: 0.5,
+    opacity: 0.8,
 });
 
 var sliceX = view
@@ -122,7 +122,7 @@ var sliceX = view
         height: [10, 11],
     })
     .line({
-        color: 0xc00040,
+        color: "#c00040",
         opacity: 0.5,
         width: 1,
         zBias: 3,
@@ -138,7 +138,7 @@ var sliceY = view
         order: "yx",
     })
     .line({
-        color: 0x0080f0,
+        color: "#0080f0",
         opacity: 0.5,
         width: 1,
         zBias: 3,
