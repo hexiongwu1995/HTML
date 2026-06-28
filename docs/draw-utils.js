@@ -8,7 +8,7 @@ function drawRect(view, points, position) {
     view.array({ data: points, channels: 3, live: false });
     view
         .transform({ position, scale: [1, 1, 1] })
-        .line({ closed: true, color: "#bababa", width: 1, join: "miter" })
+        .line({ closed: true, color: "#ebebeb", width: 1, join: "miter" })
         .end();
 }
 
