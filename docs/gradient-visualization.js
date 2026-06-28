@@ -32,6 +32,9 @@ colors = {
     grid: new THREE.Color(0.9, 0.9, 0.9),
     frame: new THREE.Color(0.9, 0.9, 0.9),
     labels: new THREE.Color(0.6, 0.6, 0.6),
+    surface: new THREE.Color(0.95, 0.95, 0.95),
+    blue: new THREE.Color(0.0, 0.5, 1.0),
+    orange: new THREE.Color(1.0, 0.5, 0.0),
 };
 
 var rangeX = 1;
@@ -74,7 +77,7 @@ view
         data: ["x", "y", "z"],
     })
     .label({
-        color: colors.labels,
+        color: "rgb(102, 102, 102)",
         outline: 0,
         offset: [0, 0],
     });
@@ -86,7 +89,7 @@ view
     .grid({
         axes: [1, 3],
         width: 1,
-        color: colors.grid,
+        color: "rgb(218, 218, 218)",
         depth: 0.5,
     })
     .end()
@@ -111,7 +114,7 @@ view.area({
     lineX: true,
     lineY: true,
     shaded: false,
-    color: "#efefef",
+    color: "rgb(255, 255, 255)",
     lineBias: 1,
     opacity: 0.8,
 });
@@ -122,7 +125,7 @@ var sliceX = view
         height: [10, 11],
     })
     .line({
-        color: "#c00040",
+        color: "rgb(255, 132, 0)",
         opacity: 0.5,
         width: 1,
         zBias: 3,
@@ -138,7 +141,7 @@ var sliceY = view
         order: "yx",
     })
     .line({
-        color: "#0080f0",
+        color: "rgb(45, 124, 235)",
         opacity: 0.5,
         width: 1,
         zBias: 3,

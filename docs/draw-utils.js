@@ -8,7 +8,7 @@ function drawRect(view, points, position) {
     view.array({ data: points, channels: 3, live: false });
     view
         .transform({ position, scale: [1, 1, 1] })
-        .line({ closed: true, color: "#ebebeb", width: 1, join: "miter" })
+        .line({ closed: true, color: "rgb(182, 182, 182)", width: 1, join: "miter" })
         .end();
 }
 
@@ -46,7 +46,7 @@ function drawCirc(view, originx, originy, originz, plane, radius, linewidth) {
 
     // 绘制轮廓圆（线）
     view.line({
-        color: "#cdcdcd",
+        color: "rgb(182, 182, 182)",
         width: linewidth,
         closed: true,
     });
