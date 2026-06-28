@@ -88,7 +88,7 @@ view.area({
     lineX: true,
     lineY: true,
     shaded: false,
-    color: "rgb(255, 255, 255)",
+    color: 0xcccccc,
     lineBias: 1,
     opacity: 0.8,
 });
